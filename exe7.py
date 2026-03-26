@@ -1,0 +1,5 @@
+nome1=input(str("digite o primeiro nome:"))
+nome2=input(str("digite o segundo nome.:"))
+nome3=input(str("digite o terceiro nome:"))
+nome4=input(str("digite o quarto nome..:"))
+nome5=input(str("digite o quarto nome..:"))
