@@ -1,4 +1,4 @@
-codigo=str(input("digite um codigo de desconto válido: "))
+codigo=str(input("digite um código de desconto válido: "))
 def validar_cupom(CAFÉ10,PROMO5):
    
    if codigo=="CAFÉ10":
