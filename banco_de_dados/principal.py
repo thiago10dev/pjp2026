@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import categoria
-import livro
+import categoria_padrao
+ 
+
+
 
 # --- MENU PRINCIPAL (ROOT) ---
 root = tk.Tk()
@@ -13,9 +15,10 @@ barra_menu = tk.Menu(root)
 
 # 2. Criar o menu "Categorias"
 menu_categorias = tk.Menu(barra_menu, tearoff=0)
+
 # Adicionando as opções dentro do menu Categorias
-menu_categorias.add_command(label="Cadastrar Nova", command=lambda: categoria.abrir_form_categoria(root))
-menu_categorias.add_command(label="Consultar Todas", command=lambda: categoria.abrir_consulta(root))
+menu_categorias.add_command(label="Cadastrar Nova", command=lambda: categoria_padrao.abrir_form_categoria(root))
+menu_categorias.add_command(label="Consultar Todas", command=lambda: categoria_padrao.abrir_consulta(root))
 menu_categorias.add_separator() # Linha divisória
 menu_categorias.add_command(label="Sair", command=root.quit)
 
@@ -28,14 +31,14 @@ root.config(menu=barra_menu)
 tk.Label(root, text="GERENCIADOR BIBLIOTECA", font=("Arial", 14, "bold")).pack(pady=30)
 
 btn_cadastrar = tk.Button(root, text="NOVO CADASTRO", width=25, height=2, 
-                          command=lambda:categoria.abrir_cadastro(root), bg="#e1e1e1")
+                          command=lambda:categoria_padrao.abrir_cadastro(root), bg="#e1e1e1")
 btn_cadastrar.pack(pady=10)
 
 # O lambda cria um "adiamento". A função só roda no clique.
 btn_consultar = tk.Button(
     root, 
     text="CONSULTAR LISTA", 
-    command=lambda: categoria.abrir_consulta(root), 
+    command=lambda: categoria_padrao.abrir_consulta(root), 
     bg="#e1e1e1"
 )
 btn_consultar.pack(pady=10)

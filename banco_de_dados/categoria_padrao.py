@@ -4,14 +4,14 @@ import sqlite3
 
 # --- BANCO DE DADOS ---
 def conectar():
-    conn = sqlite3.connect("banco.db")
+    conn = sqlite3.connect("./banco_de_dados/banco.db")
     cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS categoria (
-            id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, 
-            nome_categoria VARCHAR(100) NOT NULL
-        )
-    """)
+    # cursor.execute("""
+    #     CREATE TABLE IF NOT EXISTS categoria (
+    #         id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, 
+    #         nome_categoria VARCHAR(100) NOT NULL
+    #     )
+    # """)
     conn.commit()
     return conn
 
