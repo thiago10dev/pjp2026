@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import categoria_padrao
+import livro
  
 
 
@@ -44,8 +45,9 @@ btn_consultar = tk.Button(
 btn_consultar.pack(pady=10)
 
 btn_cadastrar_livro = tk.Button(root, text="NOVO CADASTRO LIVRO", width=25, height=2, 
-                          command=lambda:livro.abrir_cadastro_livro(root), bg="#e1e1e1")
+                          command=lambda:livro.abrir_cadastro(root), bg="#e1e1e1")
 btn_cadastrar_livro.pack(pady=10)
+
 
 btn_sair = tk.Button(root, text="SAIR", width=25, command=root.quit, fg="red")
 btn_sair.pack(pady=20)

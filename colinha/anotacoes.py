@@ -1,5 +1,5 @@
 #BANCO DE DADOS
-'''
+"""
 CREATE TABLE usuario
 (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, nome_usuario VARCHAR(100) NOT NULL, telefone varchar(50) NOT NULL, endereco varchar(50) NOT NULL, cpf varchar(50) NOT NULL, email varchar(50));
 
@@ -197,6 +197,7 @@ OFFSET: pula as primeiras linhas (útil para paginação).
 """
 
 #COMANDOS GIT HUB
+
 """
  # Inicializar um Repositório #
 
@@ -261,4 +262,4 @@ Copiar
 Baixa e mescla as alterações do repositório remoto no branch atual.
 
 
-'''
+"""
