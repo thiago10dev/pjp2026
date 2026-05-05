@@ -2,10 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import categoria_padrao
 import livro
+
  
-
-
-
 # --- MENU PRINCIPAL (ROOT) ---
 root = tk.Tk()
 root.title("Menu Principal - Sistema de Biblioteca")
@@ -31,7 +29,7 @@ root.config(menu=barra_menu)
 
 tk.Label(root, text="GERENCIADOR BIBLIOTECA", font=("Arial", 14, "bold")).pack(pady=30)
 
-btn_cadastrar = tk.Button(root, text="NOVO CADASTRO", width=25, height=2, 
+btn_cadastrar = tk.Button(root, text="NOVO CADASTRO  DE CATEGORIA", width=25, height=2, 
                           command=lambda:categoria_padrao.abrir_cadastro(root), bg="#e1e1e1")
 btn_cadastrar.pack(pady=10)
 
@@ -44,7 +42,7 @@ btn_consultar = tk.Button(
 )
 btn_consultar.pack(pady=10)
 
-btn_cadastrar_livro = tk.Button(root, text="NOVO CADASTRO LIVRO", width=25, height=2, 
+btn_cadastrar_livro = tk.Button(root, text="NOVO CADASTRO DE LIVRO", width=25, height=2, 
                           command=lambda:livro.abrir_cadastro(root), bg="#e1e1e1")
 btn_cadastrar_livro.pack(pady=10)
 
