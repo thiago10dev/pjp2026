@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import sqlite3
 
+#status,autor
+
 # --- BANCO DE DADOS ---
 def conectar():
     conn = sqlite3.connect("./banco_de_dados/banco.db")
@@ -25,6 +27,14 @@ def obter_categorias():
     conn.close()
     return dados
 
+def obter_autor():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id_autor, nome_autor FROM autor")
+    dados = cursor.fetchall()
+    conn.close()
+    return dados
+
 
 def abrir_cadastro(parent, id_livro=None):
     janela_cad = tk.Toplevel(parent)
@@ -36,17 +46,24 @@ def abrir_cadastro(parent, id_livro=None):
     ent_nome.pack(pady=5)
 
         # Campo: Seleção de Categoria (Combobox)
-    tk.Label(janela_cad, text="Selecione a Categoria:").pack(pady=(15, 5))
+    
     
     # Buscamos as categorias do banco
     lista_categorias = obter_categorias() # Formato: [(1, 'Eletrônicos'), (2, 'Móveis')]
-    
+    lista_autor = obter_autor()
     # Criamos uma lista apenas com os nomes para exibir no Combobox
     nomes_categorias = [c[1] for c in lista_categorias]
-    
+    nome_autor = [ c[1] for c in lista_autor]
+
+    tk.Label(janela_cad, text="Selecione a Categoria:").pack(pady=(15, 5))
+
     combo_categoria = ttk.Combobox(janela_cad, values=nomes_categorias, width=32, state="readonly")
     combo_categoria.pack()
 
+    tk.Label(janela_cad, text="Selecione o autor:").pack(pady=(15, 5))
+
+    combo_autor = ttk.Combobox(janela_cad,values=nome_autor, width=32, state="readonly")
+    combo_autor.pack()
     # Se for EDIÇÃO, preenche o campo com o nome atual
     if id_livro:
         conn = conectar()
@@ -58,8 +75,8 @@ def abrir_cadastro(parent, id_livro=None):
         conn.close()
     
     def salvar():
-        nome = ent_nome.get()
-        if not nome.strip():
+        id_cat = ent_nome.get()
+        if not id_cat.strip():
             messagebox.showwarning("Aviso", "O nome não pode estar vazio.")
             return
 
@@ -68,11 +85,11 @@ def abrir_cadastro(parent, id_livro=None):
         
         if id_livro:
             # Lógica de Atualização
-            cursor.execute("UPDATE livro SET nome_livro = ? WHERE id_livro = ?", (nome, id_livro))
+            cursor.execute("UPDATE livro SET nome_livro = ? WHERE id_livro = ?", (id_cat, id_livro))
             mensagem = "livro atualizado com sucesso!"
         else:
             # Lógica de Inserção
-            cursor.execute("INSERT INTO livro (nome_livro) VALUES (?)", (nome,))
+            cursor.execute("INSERT INTO livro (id_categoria) VALUES (?)", (id_cat,))
             mensagem = "livro cadastrado com sucesso!"
             
         conn.commit()

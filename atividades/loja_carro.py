@@ -26,7 +26,7 @@ elif tentativas==3:
   print ("aguarde 30 minutos antes de tentar novamente!")
  
 if senha == "senha123" and usuario == "peixe dourado":
- pergunta= str(input("digite o que deseja no sistema: "))
+      pergunta= str(input("digite o que deseja no sistema: "))
 lista_de_veiculos=["chevrolet s10" , "ford raptor" , "volkswagen amarok" , "dogderam 2500"]
 lista_de_pedidos=["corvette c6","chevrolet camaro" ,"ford mustang","porsche gt3 rs" ]
 while pergunta != "sair" :
@@ -85,10 +85,9 @@ while pergunta != "sair" :
          pergunta=str(input("digite o que deseja a seguir: "))
  
     case _:
-     print("---------------------------".center(60))
-     print("está opção não é valida!")
-     print("---------------------------".center(60))
-     pergunta=str(input("digite o que deseja a seguir: "))
+       print("---------------------------".center(60))
+       print("está opção não é valida!")
+       pergunta=str(input("digite o que deseja a seguir: "))
  
 texto2=" VOÇÊ SAIU DO SISTEMA "
 enchimento2="_"
