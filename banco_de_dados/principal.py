@@ -5,6 +5,7 @@ import livro
 import sqlite3
 import datetime
 import emprestimo
+import cadastro_usuarios
 
 def realizar_backup(db_origem, db_destino):
     try:
@@ -85,8 +86,12 @@ btn_cadastrar_livro = tk.Button(root, text="NOVO CADASTRO DE LIVRO", width=30, h
 btn_cadastrar_livro.pack(pady=10)
 
 btn_cadastrar_emprestimo = tk.Button(root, text="NOVO CADASTRO DE EMPRÉSTIMO", width=30 , height=2,
-                                  command=lambda:emprestimo.abrir_cadastro_livro(root), bg ="#e1e1e1")
+                                  command=lambda:emprestimo.abrir_cadastro_emprestimo(root), bg ="#e1e1e1")
 btn_cadastrar_emprestimo.pack(pady=10)
+
+btn_cadastrar_usuario = tk.Button(root, text="NOVO CADASTRO DE USUARIO", width=30 , height=2,
+                                  command=lambda:cadastro_usuarios.cadastrar_usuarios(root), bg ="#e1e1e1")
+btn_cadastrar_usuario.pack(pady=10)
 
 
 btn_sair = tk.Button(root, text="SAIR", width=25, command=root.quit, fg="red")

@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import sqlite3
 
-#status,autor
+#status
 
 # --- BANCO DE DADOS ---
 def conectar():
@@ -39,11 +39,15 @@ def obter_autor():
 def abrir_cadastro(parent, id_livro=None):
     janela_cad = tk.Toplevel(parent)
     janela_cad.title("Editar" if id_livro else "Cadastrar livro")
-    janela_cad.geometry("350x200")
+    janela_cad.geometry("550x400")
     
     tk.Label(janela_cad, text="Nome do livro:", font=("Arial", 10)).pack(pady=10)
     ent_nome = tk.Entry(janela_cad, width=30)
     ent_nome.pack(pady=5)
+
+    tk.Label(janela_cad, text="status:", font=("Arial", 10)).pack(pady=10)
+    ent_status = tk.Entry(janela_cad, width=30)
+    ent_status.pack(pady=5)
 
         # Campo: Seleção de Categoria (Combobox)
     
@@ -75,9 +79,21 @@ def abrir_cadastro(parent, id_livro=None):
         conn.close()
     
     def salvar():
-        id_cat = ent_nome.get()
-        if not id_cat.strip():
+        nome_livro = ent_nome.get()
+        categoria = combo_categoria.get()
+        autor = combo_autor.get()
+        status = ent_status.get()
+        if not nome_livro.strip():
             messagebox.showwarning("Aviso", "O nome não pode estar vazio.")
+            return
+        if not status.strip():
+            messagebox.showwarning("Aviso", "O status não pode estar vazio.")
+            return
+        if not categoria.strip():
+            messagebox.showwarning("Aviso", "selecione uma categoria.")
+            return
+        if not autor.strip():
+            messagebox.showwarning("Aviso", "selecione um autor.")
             return
 
         conn = conectar()
@@ -85,11 +101,11 @@ def abrir_cadastro(parent, id_livro=None):
         
         if id_livro:
             # Lógica de Atualização
-            cursor.execute("UPDATE livro SET nome_livro = ? WHERE id_livro = ?", (id_cat, id_livro))
+            cursor.execute("UPDATE livro SET nome_livro = ? WHERE id_livro = ?", (nome_livro, id_livro))
             mensagem = "livro atualizado com sucesso!"
         else:
             # Lógica de Inserção
-            cursor.execute("INSERT INTO livro (id_categoria) VALUES (?)", (id_cat,))
+            cursor.execute("INSERT INTO livro (nome_livro,categoria,autor,status) VALUES (?,?,?,?)", (nome_livro,categoria,autor,status))
             mensagem = "livro cadastrado com sucesso!"
             
         conn.commit()
