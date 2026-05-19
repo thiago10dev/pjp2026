@@ -1,11 +1,14 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import categoria_padrao
 import livro
 import sqlite3
 import datetime
 import emprestimo
 import cadastro_usuarios
+import cadastro_autor
+import cadastro_multa
+import listas
+import categoria_padrao
 
 def realizar_backup(db_origem, db_destino):
     try:
@@ -37,7 +40,7 @@ nome_backup = f"./banco_de_dados/backup_sistema_{data_atual}.db"
 # --- MENU PRINCIPAL (ROOT) ---
 root = tk.Tk()
 root.title("Menu Principal - Sistema de Biblioteca")
-root.geometry("400x500")
+root.geometry("500x600")
 
 # 1. Criar a barra de menu principal
 barra_menu = tk.Menu(root)
@@ -46,7 +49,6 @@ barra_menu = tk.Menu(root)
 menu_categorias = tk.Menu(barra_menu, tearoff=0)
 menu_backup = tk.Menu(barra_menu, tearoff=1)
 
-# Adicionando as opções dentro do menu Categorias 
 
 #botão categoria
 menu_categorias.add_command(label="Cadastrar Nova", command=lambda: categoria_padrao.abrir_form_categoria(root))
@@ -60,7 +62,6 @@ menu_backup.add_command(label="realizar backup", command=lambda: realizar_backup
 
 #  Adiciona o menu à barra principal
 
-barra_menu.add_cascade(label="Categorias", menu=menu_categorias)
 barra_menu.add_cascade(label="backup", menu=menu_backup)
 
 # 5. Configurar a janela para usar esta barra de menu
@@ -68,30 +69,38 @@ root.config(menu=barra_menu)
 
 tk.Label(root, text="GERENCIADOR BIBLIOTECA", font=("Arial", 14, "bold")).pack(pady=30)
 
-btn_cadastrar = tk.Button(root, text="NOVO CADASTRO  DE CATEGORIA", width=30, height=2, 
-                          command=lambda:categoria_padrao.abrir_cadastro(root), bg="#e1e1e1")
-btn_cadastrar.pack(pady=10)
-
 # O lambda cria um "adiamento". A função só roda no clique.
 btn_consultar = tk.Button(
     root, 
-    text="CONSULTAR LISTA DE CATEGORIA", width=30,height=2,
-    command=lambda: categoria_padrao.abrir_consulta(root), 
+    text="CONSULTAR LISTA", width=30,height=2,
+    command=lambda: listas.abrir_opcao_lista(root), 
     bg="#e1e1e1"
 )
 btn_consultar.pack(pady=10)
 
-btn_cadastrar_livro = tk.Button(root, text="NOVO CADASTRO DE LIVRO", width=30, height=2, 
+btn_cadastrar = tk.Button(root, text="CADASTRAR CATEGORIA", width=30, height=2, 
+                          command=lambda:categoria_padrao.abrir_cadastro(root), bg="#e1e1e1")
+btn_cadastrar.pack(pady=10)
+
+btn_cadastrar_usuario = tk.Button(root, text="CADASTRAR AUTOR", width=30 , height=2,
+                                  command=lambda:cadastro_autor.cadastrar_autor(root), bg ="#e1e1e1")
+btn_cadastrar_usuario.pack(pady=10)
+
+btn_cadastrar_livro = tk.Button(root, text="CADASTRAR LIVRO", width=30, height=2, 
                           command=lambda:livro.abrir_cadastro(root), bg="#e1e1e1")
 btn_cadastrar_livro.pack(pady=10)
 
-btn_cadastrar_emprestimo = tk.Button(root, text="NOVO CADASTRO DE EMPRÉSTIMO", width=30 , height=2,
+btn_cadastrar_emprestimo = tk.Button(root, text="CADASTRAR EMPRÉSTIMO", width=30 , height=2,
                                   command=lambda:emprestimo.abrir_cadastro_emprestimo(root), bg ="#e1e1e1")
 btn_cadastrar_emprestimo.pack(pady=10)
 
-btn_cadastrar_usuario = tk.Button(root, text="NOVO CADASTRO DE USUARIO", width=30 , height=2,
+btn_cadastrar_usuario = tk.Button(root, text="CADASTRAR USUARIO", width=30 , height=2,
                                   command=lambda:cadastro_usuarios.cadastrar_usuarios(root), bg ="#e1e1e1")
 btn_cadastrar_usuario.pack(pady=10)
+
+btn_aplicar_multa = tk.Button(root, text="APLICAR MULTA", width=30 , height=2,
+                                  command=lambda:cadastro_multa.abrir_aplicar_multa(root), bg ="#e1e1e1")
+btn_aplicar_multa.pack(pady=10)
 
 
 btn_sair = tk.Button(root, text="SAIR", width=25, command=root.quit, fg="red")

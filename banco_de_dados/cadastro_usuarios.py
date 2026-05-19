@@ -37,11 +37,11 @@ def cadastrar_usuarios(parent, id_livro=None):
     ent_endereco = tk.Entry(janela_cad, width=100)
     ent_endereco.pack(pady=5)
 
-    tk.Label(janela_cad, text="informe o seu cpf", font=("Arial", 10)).pack(pady=10)
+    tk.Label(janela_cad, text="informe o cpf", font=("Arial", 10)).pack(pady=10)
     ent_cpf = tk.Entry(janela_cad, width=100)
     ent_cpf.pack(pady=5)
 
-    tk.Label(janela_cad, text="informe o seu email", font=("Arial", 10)).pack(pady=10)
+    tk.Label(janela_cad, text="informe o email", font=("Arial", 10)).pack(pady=10)
     ent_email = tk.Entry(janela_cad, width=100)
     ent_email.pack(pady=5)
 

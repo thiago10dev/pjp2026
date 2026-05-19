@@ -8,12 +8,7 @@ import sqlite3
 def conectar():
     conn = sqlite3.connect("./banco_de_dados/banco.db")
     cursor = conn.cursor()
-    # cursor.execute("""
-    #     CREATE TABLE IF NOT EXISTS categoria (
-    #         id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, 
-    #         nome_categoria VARCHAR(100) NOT NULL
-    #     )
-    # """)
+    
     conn.commit()
     return conn
 
@@ -36,9 +31,9 @@ def obter_usuario():
     conn.close()
     return dados
 
-def abrir_cadastro_emprestimo(parent, id_livro=None):
+def abrir_cadastro_emprestimo(parent,):
     janela_cad = tk.Toplevel(parent)
-    janela_cad.title("Editar" if id_livro else "Cadastrar emprestimo")
+    janela_cad.title("Cadastrar emprestimo")
     janela_cad.geometry("550x400")
     
     tk.Label(janela_cad, text="data de devolução", font=("Arial", 10)).pack(pady=10)
@@ -87,23 +82,19 @@ def abrir_cadastro_emprestimo(parent, id_livro=None):
         conn = conectar()
         cursor = conn.cursor()
         
-        if id_livro:
-            # Lógica de Atualização
-            cursor.execute("UPDATE livro SET nome_livro = ? WHERE id_livro = ?", (nome_livro, id_livro))
-            mensagem = "livro atualizado com sucesso!"
-        else:
+        
             # Lógica de Inserção
-            cursor.execute("INSERT INTO emprestimo (nome_livro,nome_usuario,data_devolucao,data_emprestimo) VALUES (?,?,?,?)", (nome_livro,usuario,data_devolucao,data_emprestimo))
-            mensagem = "livro cadastrado com sucesso!"
-            cursor.execute("UPDATE livro SET status = 'emprestado' WHERE nome_livro = ?",(nome_livro,))
+        cursor.execute("INSERT INTO emprestimo (nome_livro,nome_usuario,data_devolucao,data_emprestimo) VALUES (?,?,?,?)", (nome_livro,usuario,data_devolucao,data_emprestimo))
+        mensagem = "livro cadastrado com sucesso!"
+        cursor.execute("UPDATE livro SET status = 'Emprestado' WHERE nome_livro = ?",(nome_livro,))
             
         conn.commit()
         conn.close()
         messagebox.showinfo("Sucesso", "emprestimo feito com sucesso!")
         janela_cad.destroy()
 
-    btn_texto = "Atualizar" if id_livro else "Salvar"
-    btn_cor = "#ffcc00" if id_livro else "lightgreen"
+    btn_texto = "Salvar"
+    btn_cor =  "lightgreen"
     
     tk.Button(janela_cad, text=btn_texto, command=salvar, bg=btn_cor).pack(pady=20)
 
